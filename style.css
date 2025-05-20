@@ -64,10 +64,10 @@
     position: fixed;
     top: 100px;
     left: 10px;
-    width: 220px;
+    width: 332px;
     background: #1e1e1e;
     color: white;
-    font-family: sans-serif;
+    font-family: 'Exo 2';
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     z-index: 9999;
@@ -105,7 +105,6 @@
 
 div#sticky-tab-box #recent_topics {
     font-size: 12px;
-    font-family: 'Exo 2';
 }
 
 #sticky-tab-box .material-icons {
@@ -129,7 +128,7 @@ div#sticky-tab-box #recent_topics {
 
 #sticky-tab-box .mod-recent-info {
     display:flex;
-    lign-items: center;
+    align-items: center;
 }
 
 #sticky-tab-box .mod-recent-time span {
