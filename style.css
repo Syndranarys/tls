@@ -116,7 +116,13 @@ div#sticky-tab-box #recent_topics {
     font-size: 12px;
 }
 
+#sticky-tab-box span.mod-recent-author:before {
+    content: 'par ';
+}
 
+#sticky-tab-box .mod-recent-info {
+    display:flex;
+}
 
 
 @media only screen and (max-width: 768px) {
