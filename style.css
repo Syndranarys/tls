@@ -7,7 +7,8 @@
 }
 
 .forum-wrapper {
-    grid-template-columns: 5% 40%;
+    height: auto;
+    display: flex;
 }
 
 .forum-left-content {
@@ -18,10 +19,6 @@
 .forum.type-table-forum {
     display: grid;
     grid-template-columns: 1fr 1fr;
-}
-
-.forum-wrapper {
-    display: flex;
 }
 
 .forum {
@@ -39,9 +36,7 @@
     padding: 10px 10px;
 }
 
-/* SUJETS */
-
-.posts .avatar-default img {
+.avatar-default img {
     display: none;
 }
 
