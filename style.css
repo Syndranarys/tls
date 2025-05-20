@@ -38,3 +38,9 @@
 .forum-left-content {
     padding: 10px 10px;
 }
+
+/* SUJETS */
+
+.posts .avatar-default img {
+    display: none;
+}
