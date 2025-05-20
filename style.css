@@ -1,3 +1,16 @@
-.bouhautbas a {
-    background:red;
+#header-banner {
+    height:10px;
+}
+
+.forum-content {
+    display: none;
+}
+
+.forum-wrapper {
+    grid-template-columns: 5% 40%;
+}
+
+.forum-left-content {
+    display: block;
+    align-content: unset;
 }
