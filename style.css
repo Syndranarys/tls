@@ -118,6 +118,8 @@ div#sticky-tab-box #recent_topics {
 
 #sticky-tab-box span.mod-recent-author:before {
     content: 'par ';
+    color: white;
+    margin-right: 3px;
 }
 
 #sticky-tab-box span.mod-recent-author {
