@@ -33,12 +33,26 @@
 }
 
 .forum-left-content {
+    display: flex;
     padding: 10px 10px;
+    gap: 10px;
+}
+
+.forum-sous-cat {
+        width: 50%;
+    height: fit-content;
+    margin-top: 36px;
+}
+
+.forum-name {
+    width: 50%;
 }
 
 .avatar-default img {
     display: none;
 }
+
+
 
 
 @media only screen and (max-width: 768px) {
