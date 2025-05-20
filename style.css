@@ -57,6 +57,52 @@
 }
 
 
+/* Sticly */
+
+#sticky-tab-box {
+  position: fixed;
+  top: 100px;
+  left: 10px;
+  width: 220px;
+  background: #1e1e1e;
+  color: white;
+  font-family: sans-serif;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+#sticky-tab-box .tab-buttons {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-bottom: 1px solid #444;
+}
+
+#sticky-tab-box .tab-buttons li {
+  padding: 10px;
+  cursor: pointer;
+  background: #2a2a2a;
+  border-bottom: 1px solid #444;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#sticky-tab-box .tab-buttons li:hover,
+#sticky-tab-box .tab-buttons li.active {
+  background: #444;
+}
+
+#sticky-tab-box .tab-content {
+  padding: 15px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 
 
 @media only screen and (max-width: 768px) {
