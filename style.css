@@ -60,16 +60,17 @@
 /* Sticly */
 
 #sticky-tab-box {
-  position: fixed;
-  top: 100px;
-  left: 10px;
-  width: 220px;
-  background: #1e1e1e;
-  color: white;
-  font-family: sans-serif;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  z-index: 9999;
+    display: block;
+    position: fixed;
+    top: 100px;
+    left: 10px;
+    width: 220px;
+    background: #1e1e1e;
+    color: white;
+    font-family: sans-serif;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
 }
 
 #sticky-tab-box .tab-buttons {
