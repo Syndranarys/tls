@@ -57,9 +57,16 @@
 }
 
 
+
+
+
 /* Sticly */
 
 @media screen and (min-width: 1921px) { 
+
+.block.introduction {
+    display: none;
+}
 
 #sticky-tab-box {
     display: block;
