@@ -103,6 +103,20 @@
   line-height: 1.5;
 }
 
+div#sticky-tab-box #recent_topics {
+    font-size: 12px;
+    font-family: 'Exo 2';
+}
+
+#sticky-tab-box .material-icons {
+    display: none;
+}
+
+#sticky-tab-box  a.mod-recent-title {
+    font-size: 12px;
+}
+
+
 
 
 @media only screen and (max-width: 768px) {
