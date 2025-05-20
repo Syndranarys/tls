@@ -20,6 +20,15 @@
     grid-template-columns: 1fr 1fr;
 }
 
+.forum-header {
+    display: none;
+}
+
 .forum-wrapper {
     display: flex;
+}
+
+.forum {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
