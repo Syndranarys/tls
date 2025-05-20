@@ -39,9 +39,12 @@
 }
 
 .forum-sous-cat {
-        width: 50%;
+    width: 50%;
     height: fit-content;
     margin-top: 36px;
+    max-height: 75px;
+    overflow: auto;
+    width: 100%;
 }
 
 .forum-name {
