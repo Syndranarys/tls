@@ -64,7 +64,7 @@
     position: fixed;
     top: 100px;
     left: 10px;
-    width: 332px;
+    width: 315px;
     background: #1e1e1e;
     color: white;
     font-family: 'Exo 2';
@@ -74,11 +74,15 @@
 }
 
 #sticky-tab-box .tab-buttons {
-  display: flex;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  border-bottom: 1px solid #444;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    border-bottom: 1px solid #444;
+}
+
+div#sticky-tab-box .tab-content {
+    font-size: 12px;
 }
 
 #sticky-tab-box .tab-buttons li {
@@ -94,7 +98,7 @@
 
 #sticky-tab-box .tab-buttons li:hover,
 #sticky-tab-box .tab-buttons li.active {
-  background: #444;
+  background: #263238;
 }
 
 #sticky-tab-box .tab-content {
