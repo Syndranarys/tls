@@ -12,7 +12,7 @@
 }
 
 .forum-left-content {
-    width:50%;
+    width:100%;
     display: flex;
     padding: 10px 10px;
     gap: 10px;
