@@ -41,8 +41,6 @@
     margin-top: 0;
     max-height: none;
     overflow: unset;
-    border-left: 1px solid #263238;
-    padding: 0 0 0 10px;
 }
 
 .forum-lastpost {
@@ -51,6 +49,7 @@
 
 .forum-name {
     width: 50%;
+    border-left:1px solid #263238;
 }
 
 .avatar-default img {
