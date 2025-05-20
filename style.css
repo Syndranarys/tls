@@ -129,6 +129,7 @@ div#sticky-tab-box #recent_topics {
 
 #sticky-tab-box .mod-recent-info {
     display:flex;
+    lign-items: center;
 }
 
 #sticky-tab-box .mod-recent-time span {
