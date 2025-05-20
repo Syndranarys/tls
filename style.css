@@ -14,3 +14,12 @@
     display: block;
     align-content: unset;
 }
+
+.forum.type-table-forum {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.forum-wrapper {
+    display: flex;
+}
