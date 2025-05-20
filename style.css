@@ -31,6 +31,10 @@
     margin: 0;
 }
 
+.forum-header {
+    margin: 0 0 10px 0;
+}
+
 .forum-left-content {
     padding: 10px 10px;
 }
