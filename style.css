@@ -60,7 +60,7 @@
 /* Sticly */
 
 @media screen and (min-width: 1921px) { 
-    
+
 #sticky-tab-box {
     display: block;
     position: fixed;
@@ -81,6 +81,7 @@
     margin: 0;
     list-style: none;
     border-bottom: 1px solid #444;
+
 }
 
 div#sticky-tab-box .tab-content {
@@ -96,6 +97,8 @@ div#sticky-tab-box .tab-content {
   display: flex;
   align-items: center;
   gap: 6px;
+  font-size: 12px;
+  text-align: center;
 }
 
 #sticky-tab-box .tab-buttons li:hover,
