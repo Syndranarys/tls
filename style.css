@@ -12,8 +12,10 @@
 }
 
 .forum-left-content {
-    display: block;
-    align-content: unset;
+    width:50%;
+    display: flex;
+    padding: 10px 10px;
+    gap: 10px;
 }
 
 .forum.type-table-forum {
@@ -32,19 +34,12 @@
     margin: 0 0 10px 0;
 }
 
-.forum-left-content {
-    display: flex;
-    padding: 10px 10px;
-    gap: 10px;
-}
-
 .forum-sous-cat {
     width: 50%;
     height: fit-content;
     margin-top: 36px;
     max-height: 75px;
     overflow: auto;
-    width: 100%;
 }
 
 .forum-name {
