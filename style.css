@@ -21,7 +21,7 @@
 }
 
 .forum-header {
-    display: none;
+    display: none!important;
 }
 
 .forum-wrapper {
