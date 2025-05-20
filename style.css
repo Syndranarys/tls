@@ -120,8 +120,19 @@ div#sticky-tab-box #recent_topics {
     content: 'par ';
 }
 
+#sticky-tab-box span.mod-recent-author {
+    font-size: 10px;
+}
+
+
 #sticky-tab-box .mod-recent-info {
     display:flex;
+}
+
+#sticky-tab-box .mod-recent-time span {
+    margin-right: 3px;
+    color: white;
+    font-size: 10px;
 }
 
 
