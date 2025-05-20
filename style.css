@@ -59,10 +59,12 @@
 
 /* Sticly */
 
+@media screen and (min-width: 1921px) { 
+    
 #sticky-tab-box {
     display: block;
     position: fixed;
-    top: 100px;
+    top: 70px;
     left: 10px;
     width: 315px;
     background: #1e1e1e;
@@ -140,6 +142,9 @@ div#sticky-tab-box #recent_topics {
     color: white;
     font-size: 10px;
 }
+
+}
+
 
 
 @media only screen and (max-width: 768px) {
