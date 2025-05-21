@@ -56,6 +56,11 @@
     display: none;
 }
 
+#header-banner {
+    margin-top: 27px;
+}
+
+
 /* Sticly */
 
 .block.introduction {
@@ -72,6 +77,7 @@
     width: 315px;
     top: 70px;
     left: 217px;
+    border-radius: 5px !important;
 }
 
 #sticky-tab-box .tab-buttons {
