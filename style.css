@@ -1,3 +1,7 @@
+body {
+    justify-content: space-between;
+}
+
 #header-banner {
     height:10px;
 }
@@ -75,6 +79,7 @@
 .elo-forum-wrapper aside {
     display: block;
     position: relative;
+    background: #24272b;
 }
 
 .elo-forum-wrapper #wrap {
