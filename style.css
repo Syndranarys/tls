@@ -65,6 +65,21 @@
 
 @media screen and (min-width: 1921px) {
 
+#page-footer {
+    display: none;
+}
+
+.elo-forum-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.elo-forum-wrapper aside {
+    display: block;
+    position: relative;
+}
+
 .block.introduction {
     display: none;
 }
@@ -74,7 +89,7 @@
     background: #1d1f22;
     color: white;
     font-family: 'Exo 2';
-    position: fixed;
+    position: sticky;
     height: 430px;
     width: 315px;
     top: 70px;
