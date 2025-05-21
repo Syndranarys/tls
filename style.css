@@ -88,9 +88,9 @@ div#sticky-tab-box .tab-content {
 }
 
 #sticky-tab-box .tab-buttons li {
+ background: #24272b;
   padding: 10px;
   cursor: pointer;
-  background: #2a2a2a;
   border-bottom: 1px solid #444;
   transition: background 0.2s;
   display: flex;
