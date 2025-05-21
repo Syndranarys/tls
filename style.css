@@ -80,6 +80,10 @@
     position: relative;
 }
 
+.elo-forum-wrapper #wrap {
+    margin:unset;
+}
+
 .block.introduction {
     display: none;
 }
