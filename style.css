@@ -56,7 +56,18 @@
     display: none;
 }
 
+.elo-forum-wrapper {
+    display: grid;
+    grid-template-columns: 24% 76%;
+    margin: 0 auto;
+    width: 1500px;
 
+}
+
+.elo-forum-wrapper #wrap {
+    width: 100%;
+    max-width: none;
+}
 
 
 
@@ -70,16 +81,9 @@
 
 #sticky-tab-box {
     display: block;
-    position: fixed;
-    top: 70px;
-    left: 10px;
-    width: 315px;
     background: #1e1e1e;
     color: white;
     font-family: 'Exo 2';
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    z-index: 9999;
 }
 
 #sticky-tab-box .tab-buttons {
