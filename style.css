@@ -73,8 +73,6 @@
 
 /* Sticly */
 
-@media screen and (min-width: 1921px) { 
-
 .block.introduction {
     display: none;
 }
@@ -157,7 +155,7 @@ div#sticky-tab-box #recent_topics {
     font-size: 10px;
 }
 
-}
+
 
 
 
