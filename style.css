@@ -2,10 +2,6 @@ body {
     justify-content: space-between;
 }
 
-#header-banner {
-    height:10px;
-}
-
 .forum-content {
     display: none;
 }
