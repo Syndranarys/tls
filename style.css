@@ -1,189 +1,1051 @@
-body {
-    justify-content: space-between;
-}
+/* =====================================================================
+   STAR WARS : THE LAST STAND — Refonte 2026 (thème alternatif)
+   ---------------------------------------------------------------------
+   • Se charge PAR-DESSUS la feuille de style du forum (bouton contraste).
+   • Pour l'appliquer à tout le monde : coller ce fichier tel quel À LA FIN
+     de la feuille de style CSS du forum. Ne rien supprimer d'autre.
+   • Partie 1 = version ordinateur (tout est préfixé par #wrap ou
+     body:not(#mpage-body-modern) pour ne jamais toucher la version mobile).
+   • Partie 2 = version mobile de Forumactif (préfixe #mpage-body-modern).
+   • Les arrondis portent un !important : c'est nécessaire pour passer
+     devant la règle « * { border-radius: 0 !important } » du forum.
+   ===================================================================== */
 
-.forum-content {
-    display: none;
-}
+:root {
+  /* Palette du forum (inchangée) */
+  --tls-bg: #1d1f22;          /* fond principal des blocs */
+  --tls-bg-deep: #161819;     /* fond le plus sombre */
+  --tls-surface: #24272b;     /* fond du conteneur général */
+  --tls-surface-2: #272a2f;   /* encarts (dernier message, sous-forums) */
+  --tls-panel: #263238;       /* bleu-gris des séparations */
+  --tls-hover: #2c3338;       /* survol */
+  --tls-line: rgba(255, 255, 255, .07);
+  --tls-line-strong: rgba(255, 255, 255, .12);
+  --tls-text: #e0e0e0;
+  --tls-text-strong: #ffffff;
+  --tls-muted: #8a959b;
+  --tls-accent: #03d9c4;      /* turquoise */
+  --tls-accent-soft: rgba(3, 217, 196, .12);
+  --tls-accent-line: rgba(3, 217, 196, .35);
+  --tls-new: #cd5c5c;         /* nouveaux messages */
 
-.forum-wrapper {
-    height: auto;
-    display: flex;
-}
+  /* Formes */
+  --tls-r: 8px;               /* arrondi des blocs */
+  --tls-r-sm: 4px;            /* arrondi des boutons, encarts */
+  --tls-shadow: 0 6px 24px rgba(0, 0, 0, .35);
+  --tls-ease: cubic-bezier(.4, 0, .2, 1);
 
-.forum-left-content {
-    width: 100%;
-    display: flex;
-    padding: 10px 10px;
-    gap: 10px;
-    align-items: center;
-}
-
-.forum.type-table-forum {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.forum {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 10px;
-    margin: 0;
-}
-
-.forum-header {
-    margin: 0 0 10px 0;
-}
-
-.forum-sous-cat {
-    width: 50%;
-    height: fit-content;
-    margin-top: 0;
-    max-height: none;
-    overflow: unset;
-}
-
-.forum-lastpost {
-    background:none;
-}
-
-.forum-name {
-    width: 50%;
-    border-right:1px solid #263238;
-}
-
-.avatar-default img {
-    display: none;
-}
-
-#header-banner {
-    margin-top: 27px;
+  /* Lecture des messages */
+  --tls-read-size: 14px;
+  --tls-read-line: 1.75;
+  --tls-read-weight: 400;
 }
 
 
-/* Sticly */
+/* =====================================================================
+   PARTIE 1 — VERSION ORDINATEUR
+   ===================================================================== */
 
-@media screen and (min-width: 1921px) {
+/* ---------- 1. Conteneur général ---------- */
 
-
-.elo-forum-wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
+/* La barre Switcheroo (72px, fixe à gauche) recouvrait le bord du
+   contenu sur les écrans de moins de ~1350px : on lui réserve sa place. */
+body:not(#mpage-body-modern):has(#switcheroo[direction="vertical"]) {
+  padding-left: 72px !important;   /* un script publicitaire force padding:0 */
+  box-sizing: border-box;
 }
 
-.elo-forum-wrapper aside {
-    display: block;
-    position: relative;
+body:not(#mpage-body-modern) #wrap {
+  background: rgba(36, 39, 43, .92);
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r) !important;
+  box-shadow: var(--tls-shadow);
+  padding: 16px;
 }
 
-.elo-forum-wrapper #wrap {
-    margin:unset;
+/* Blocs génériques (sidebar, statistiques, qui est en ligne…) */
+#wrap .block {
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r) !important;
+  overflow: hidden;
+  box-shadow: none;
+}
+#wrap .block .block-header {
+  background: var(--tls-bg-deep);
+  border-bottom: 1px solid var(--tls-line);
+  letter-spacing: .06em;
+  text-transform: uppercase;
 }
 
-.block.introduction {
-    display: none;
+/* Titre de page (nom du forum / du sujet) */
+#wrap .page-header,
+#wrap .topic-header {
+  background: var(--tls-bg);
+  border: 1px solid var(--tls-line);
+  border-left: 3px solid var(--tls-accent);
+  border-radius: var(--tls-r) !important;
+  padding: 14px 18px;
+  margin: 0 0 14px;
+}
+#wrap .page-header h1,
+#wrap .topic-header h1 {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+#wrap .page-header h1 a,
+#wrap .topic-header h1 a {
+  font-weight: 600 !important;
+  color: var(--tls-text-strong);
 }
 
-#sticky-tab-box {
-    display: block;
-    background: #1d1f22;
-    color: white;
-    font-family: 'Exo 2';
-    position: sticky;
-    height: 430px;
-    width: 315px;
-    top: 70px;
-    left: 10px;
-    border-radius: 5px !important;
-}
-
-#sticky-tab-box .tab-buttons {
-    display: flex;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    border-bottom: 1px solid #444;
-
-}
-
-div#sticky-tab-box .tab-content {
-    font-size: 12px;
-}
-
-#sticky-tab-box .tab-buttons li {
- background: #24272b;
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #444;
-  transition: background 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+/* Fil d'Ariane */
+#wrap #breadcrumbs {
+  background: transparent;
+  padding: 0;
   font-size: 12px;
-  text-align: center;
+}
+#wrap #breadcrumbs a {
+  color: var(--tls-muted);
+  transition: color .15s var(--tls-ease);
+}
+#wrap #breadcrumbs a:hover { color: var(--tls-accent); }
+
+/* Bandeau Holonet */
+#wrap div#fa_ticker_block {
+  background: #f2f2f2;
+  border-left: 0;
+  border-radius: var(--tls-r-sm) !important;
+  box-shadow: inset 4px 0 0 var(--tls-new);
+  margin-bottom: 18px;
+}
+#wrap div#fa_ticker_block:before {
+  background: var(--tls-new);
+  color: #fff;
+  border-radius: var(--tls-r-sm) !important;
+  padding: 1px 8px;
+  width: auto;
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
 
-#sticky-tab-box .tab-buttons li:hover,
-#sticky-tab-box .tab-buttons li.active {
-  background: #263238;
+
+/* ---------- 2. Boutons ---------- */
+
+body:not(#mpage-body-modern) .button,
+body:not(#mpage-body-modern) .button1,
+body:not(#mpage-body-modern) .button2,
+body:not(#mpage-body-modern) .btn-default,
+body:not(#mpage-body-modern) .mainoption,
+body:not(#mpage-body-modern) .liteoption,
+body:not(#mpage-body-modern) .btn-flat,
+body:not(#mpage-body-modern) .btn-red,
+#wrap .post-buttons a,
+#wrap .post-buttons span,
+#wrap .pagination > a,
+#wrap .pagination > span > a,
+#wrap .pagination > span > strong,
+#wrap .pagination > span > b {
+  border-radius: var(--tls-r-sm) !important;
+  transition: background-color .15s var(--tls-ease), color .15s var(--tls-ease), box-shadow .15s var(--tls-ease);
+}
+#wrap .pagination > span > strong,
+#wrap .pagination > span > b {
+  background-color: var(--tls-accent);
+  color: var(--tls-bg);
+}
+body:not(#mpage-body-modern) header .button {
+  border-radius: var(--tls-r-sm) !important;
+}
+body:not(#mpage-body-modern) header .button:hover {
+  box-shadow: 0 0 0 3px var(--tls-accent-soft);
 }
 
-#sticky-tab-box .tab-content {
-  padding: 15px;
-  font-size: 14px;
+/* Boutons haut/bas */
+.bouhautbas {
+  border-radius: var(--tls-r-sm) !important;
+  overflow: hidden;
+}
+.bouhautbas a { background: rgba(224, 224, 224, .9); }
+
+
+/* ---------- 3. Accueil : catégories et forums ---------- */
+
+/* Titre de catégorie : aligné, avec un trait turquoise */
+#wrap .forum-header {
+  background: transparent;
+  border-bottom: 0;
+  margin: 26px 0 12px;
+  padding: 0;
+}
+#wrap .forum-header .category-title h2 {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  padding-bottom: 10px;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .6);
+}
+#wrap .forum-header .category-title h2:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 56px;
+  height: 2px;
+  transform: translateX(-50%);
+  background: var(--tls-accent);
+  box-shadow: 0 0 10px var(--tls-accent-line);
+}
+
+/* Carte d'un forum */
+#wrap .forum-wrapper {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 14px;
+  background: var(--tls-bg);
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r) !important;
+  transition: border-color .2s var(--tls-ease), box-shadow .2s var(--tls-ease), transform .2s var(--tls-ease);
+}
+#wrap .forum-wrapper:hover {
+  border-color: var(--tls-accent-line);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .45);
+  transform: translateY(-2px);
+}
+/* Nouveaux messages : liseré rouge à gauche */
+#wrap .forum-wrapper.cat_new,
+#wrap .forum-wrapper.forum_new {
+  box-shadow: inset 3px 0 0 var(--tls-new);
+}
+
+#wrap .forum-icon i { color: var(--tls-muted); }
+#wrap .cat_new .forum-icon i,
+#wrap .forum_new .forum-icon i { color: var(--tls-new); }
+
+#wrap .forum-name h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+#wrap .forum-name h3 a {
+  font-weight: 600 !important;
+  color: var(--tls-text-strong);
+}
+#wrap .forum-wrapper:hover .forum-name h3 a { color: var(--tls-accent); }
+
+/* Dernier message */
+#wrap .forum-lastpost {
+  background: var(--tls-surface-2);
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r-sm) !important;
+  padding: 6px;
+}
+#wrap .forum-lastpost .avatar-default img {
+  border-radius: var(--tls-r-sm) !important;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+#wrap .forum-lastpost .topic-title {
+  font-weight: 500 !important;
+  color: var(--tls-text-strong);
+}
+
+/* Sous-forums en « puces » */
+#wrap .forum-sous-cat {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 4px;
+}
+#wrap .forum-sous-cat a {
+  padding: 2px 8px;
+  background: var(--tls-surface-2);
+  border: 1px solid var(--tls-line);
+  border-radius: 999px !important;
+  font-size: 11px;
+  transition: border-color .15s var(--tls-ease), color .15s var(--tls-ease);
+}
+#wrap .forum-sous-cat a:hover {
+  border-color: var(--tls-accent-line);
+  border-bottom: 1px solid var(--tls-accent-line);
+  color: var(--tls-accent);
+}
+
+/* Image + description : dégradé au lieu du cadre noir */
+#wrap .forum-desc-img img {
+  border-left: 0;
+  object-fit: cover;
+  transition: transform .6s var(--tls-ease), filter .3s var(--tls-ease);
+  filter: brightness(.85);
+}
+#wrap .forum-wrapper:hover .forum-desc-img img {
+  transform: scale(1.03);
+  filter: brightness(1);
+}
+#wrap .forum-content { position: relative; overflow: hidden; }
+#wrap .forum-content:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--tls-bg) 0%, rgba(29, 31, 34, 0) 18%);
+}
+#wrap .textcontent {
+  top: 16px;
+  margin: 0 16px;
+  padding: 10px 14px;
+  background: rgba(14, 16, 18, .72);
+  backdrop-filter: blur(3px);
+  border-left: 2px solid var(--tls-accent);
+  border-radius: var(--tls-r-sm) !important;
   line-height: 1.5;
 }
 
-div#sticky-tab-box #recent_topics {
-    font-size: 12px;
+
+/* ---------- 4. Liste des sujets ---------- */
+
+#wrap .posts {
+  margin-bottom: 18px;
+  background: var(--tls-bg);
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r) !important;
+  overflow: hidden;
+}
+#wrap .posts-header {
+  background: var(--tls-bg-deep);
+  border-bottom: 1px solid var(--tls-line);
+  padding: 10px 16px;
+}
+/* En-tête vide entre annonces et sujets : simple séparateur */
+#wrap .posts-header:empty {
+  height: 4px;
+  padding: 0;
+}
+#wrap .posts-title {
+  margin: 0;                /* le thème Awesome mettait -48px : titre rogné */
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--tls-muted);
+}
+#wrap .posts-title i { color: var(--tls-accent); }
+
+#wrap .posts-section {
+  position: relative;
+  margin: 0;
+  padding: 12px 14px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--tls-line);
+  transition: background-color .15s var(--tls-ease);
+}
+#wrap .posts-section:last-child { border-bottom: 0; }
+#wrap .posts-section:hover { background: rgba(255, 255, 255, .025); }
+#wrap .posts-section:hover:before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--tls-accent);
 }
 
-#sticky-tab-box .material-icons {
-    display: none;
+/* Sujet non lu : liseré rouge */
+#wrap .posts-section:has(.post_new):before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--tls-new);
+}
+#wrap .posts-icon i { color: var(--tls-muted); }
+#wrap .posts-section .post_new i { color: var(--tls-new); }
+
+#wrap .posts-description h3 {
+  margin: 0 0 3px;
+  font-size: 15px;
+  line-height: 1.35;
+}
+#wrap .posts-description h3 a {
+  font-weight: 500 !important;
+  color: var(--tls-text-strong);
+}
+#wrap .posts-description h3 a:hover { color: var(--tls-accent); }
+#wrap .posts-description h3 strong {
+  color: var(--tls-accent);
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+#wrap .posts-description p {
+  font-size: 12px;
+  color: var(--tls-muted);
 }
 
-#sticky-tab-box  a.mod-recent-title {
-    font-size: 12px;
+/* Statistiques */
+#wrap .posts-statistics span {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--tls-text);
+}
+#wrap .posts-statistics span span {
+  display: block;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--tls-muted);
 }
 
-#sticky-tab-box span.mod-recent-author:before {
-    content: 'par ';
-    color: white;
-    margin-right: 3px;
+/* Dernier message */
+#wrap .posts-lastpost {
+  background: var(--tls-surface-2);
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r-sm) !important;
 }
-
-#sticky-tab-box span.mod-recent-author {
-    font-size: 10px;
+#wrap .posts-lastpost .avatar-default img {
+  width: 36px;
+  height: 52px;
+  object-fit: cover;
+  object-position: 50% 0;
+  border-radius: var(--tls-r-sm) !important;
 }
-
-
-#sticky-tab-box .mod-recent-info {
-    display:flex;
-    align-items: center;
-}
-
-#sticky-tab-box .mod-recent-time span {
-    margin-right: 3px;
-    color: white;
-    font-size: 10px;
+#wrap .posts-lastpost-time {
+  font-size: 12px;
+  color: var(--tls-muted);
 }
 
 
+/* ---------- 5. Lecture d'un sujet ---------- */
 
+#wrap .post-wrap {
+  margin-bottom: 18px;
+  background: var(--tls-bg);
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r) !important;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
+}
+
+/* En-tête du message : titre discret + date */
+#wrap .post-header {
+  background: var(--tls-bg-deep);
+  border-bottom: 1px solid var(--tls-line);
+  padding: 8px 16px;
+}
+#wrap .post-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.3;
+}
+#wrap .post-header h2 > i { color: var(--tls-accent); font-size: 18px; }
+#wrap .post-header .post-heading-wrap a {
+  font-weight: 500 !important;
+  color: var(--tls-text);
+}
+#wrap .post-header .post-date {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: var(--tls-muted);
+}
+
+/* Colonne de l'auteur */
+#wrap .post,
+#wrap .post-aside {
+  background: transparent;
+}
+#wrap .post-aside {
+  border-right: 1px solid var(--tls-line);
+  background: linear-gradient(180deg, rgba(38, 50, 56, .35) 0%, rgba(38, 50, 56, 0) 60%);
+}
+#wrap .post-author-avatar {
+  padding: 16px 12px 0;
+  text-align: center;
+}
+#wrap .post-author-avatar .avatar-big img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--tls-r-sm) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .5);
+}
+
+/* Bandeau nom / titre / profil */
+#wrap .post-profil-custom {
+  margin-top: 0;
+  padding: 16px 22px;
+  background: transparent;
+  border-bottom: 1px solid var(--tls-line);
+}
+#wrap .post-author-name {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+#wrap .post-author-name strong { font-weight: 600; }
+#wrap .post-author-title {
+  font-size: 12px;
+  letter-spacing: .05em;
+  color: var(--tls-muted);
+}
+
+/* Le texte : plus lisible */
+#wrap .post-content {
+  padding: 24px 28px;
+  font-size: var(--tls-read-size);
+  line-height: var(--tls-read-line);
+  font-weight: var(--tls-read-weight);
+  color: var(--tls-text);
+  text-align: justify;
+}
+#wrap .post-content a {
+  font-weight: 500 !important;
+  color: var(--tls-accent);
+  border-bottom: 1px solid var(--tls-accent-line);
+  transition: border-color .15s var(--tls-ease);
+}
+#wrap .post-content a:hover { border-bottom-color: var(--tls-accent); }
+#wrap .post-content img { max-width: 100%; height: auto; }
+
+/* Citations et code */
+#wrap .post-content blockquote,
+#wrap .post-content .codebox {
+  background: var(--tls-surface-2);
+  border: 0;
+  border-left: 3px solid var(--tls-panel);
+  border-radius: var(--tls-r-sm) !important;
+  padding: 10px 14px;
+}
+#wrap .post-content blockquote cite {
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--tls-muted);
+}
+
+/* Pied du message (signature, boutons) */
+#wrap .post-footer {
+  border-top: 1px solid var(--tls-line);
+}
+
+/* Réponse rapide */
+#wrap .quick-reply-textarea-wrap .sceditor-container {
+  border: 1px solid var(--tls-line) !important;
+  border-radius: var(--tls-r) !important;
+  overflow: hidden;
+}
+#wrap .quick-reply-textarea-wrap .sceditor-container iframe,
+#wrap .quick-reply-textarea-wrap .sceditor-container textarea {
+  background-color: var(--tls-surface-2) !important;
+}
+#wrap div.sceditor-toolbar {
+  background-color: var(--tls-bg-deep) !important;
+  border-bottom: 1px solid var(--tls-line);
+}
+
+/* Sujets similaires */
+#wrap .block-ptrafic .block-content.ptrafic a {
+  display: inline-block;
+  margin: 2px 0;
+  font-weight: 400 !important;
 }
 
 
+/* ---------- 6. Conteneur officiel (règlements, annonces) ---------- */
 
+.container_officiel {
+  position: relative;
+  max-width: 920px;
+  margin: 8px auto;
+  padding: 36px 40px;
+  background:
+    linear-gradient(180deg, rgba(3, 217, 196, .05) 0%, rgba(3, 217, 196, 0) 180px),
+    var(--tls-bg-deep);
+  border: 1px solid var(--tls-accent-line);
+  border-radius: var(--tls-r) !important;
+  box-shadow: inset 0 0 40px rgba(3, 217, 196, .04), var(--tls-shadow);
+  line-height: 1.75;
+  font-weight: 400;
+}
+/* Coins « hologramme » */
+.container_officiel:before,
+.container_officiel:after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--tls-accent);
+  pointer-events: none;
+}
+.container_officiel:before {
+  top: -1px; left: -1px;
+  border-right: 0; border-bottom: 0;
+  border-radius: var(--tls-r) 0 0 0 !important;
+}
+.container_officiel:after {
+  bottom: -1px; right: -1px;
+  border-left: 0; border-top: 0;
+  border-radius: 0 0 var(--tls-r) 0 !important;
+}
+/* Les titres reçoivent parfois la classe .post-content : on passe devant */
+.container_officiel h1,
+#wrap .container_officiel h1.post-content,
+#mpage-body-modern .container_officiel h1.post-content {
+  position: relative;
+  margin: 0 0 28px;
+  padding-bottom: 18px;
+  border-bottom: 0;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: .18em;
+  color: var(--tls-text-strong);
+  text-align: center;
+}
+.container_officiel h1:after {
+  content: "";
+  position: absolute;
+  left: 15%; right: 15%; bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--tls-accent), transparent);
+}
+.container_officiel h2,
+#wrap .container_officiel h2.post-content,
+#mpage-body-modern .container_officiel h2.post-content {
+  margin: 28px 0 12px;
+  padding: 4px 0 4px 14px;
+  border-bottom: 0;
+  border-left: 3px solid var(--tls-accent);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: .12em;
+  color: var(--tls-text-strong);
+  text-align: left;
+}
+.container_officiel img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--tls-r-sm) !important;
+}
+.container_officiel i { color: var(--tls-muted); }
+
+
+/* ---------- 7. Divers ---------- */
+
+/* Listes de RP (.elo_rp) */
+#wrap .elo_rp {
+  border-left: 3px solid var(--tls-accent);
+  border-radius: var(--tls-r-sm) !important;
+  background: var(--tls-bg);
+}
+
+/* Barre de défilement plus fine, aux couleurs du forum */
+body:not(#mpage-body-modern)::-webkit-scrollbar-thumb {
+  background-color: #3b4a50;
+  border-radius: 999px !important;
+}
+body:not(#mpage-body-modern)::-webkit-scrollbar-thumb:hover { background-color: var(--tls-accent); }
+
+
+/* ---------- 8. Grands écrans (≥ 1921px) : boîte d'onglets latérale ----
+   Reprise de l'ancien thème alternatif. */
+@media screen and (min-width: 1921px) {
+  .elo-forum-wrapper { display: flex; justify-content: center; gap: 12px; }
+  .elo-forum-wrapper aside { display: block; position: relative; }
+  .elo-forum-wrapper #wrap { margin: unset; }
+  .block.introduction { display: none; }
+
+  #sticky-tab-box {
+    display: block;
+    position: sticky;
+    top: 70px;
+    width: 315px;
+    height: 430px;
+    overflow: hidden;
+    background: var(--tls-bg);
+    border: 1px solid var(--tls-line);
+    border-radius: var(--tls-r) !important;
+    color: var(--tls-text);
+    font-family: 'Exo 2', Arial, sans-serif;
+  }
+  #sticky-tab-box .tab-buttons {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid var(--tls-line);
+  }
+  #sticky-tab-box .tab-buttons li {
+    flex: 1;
+    padding: 10px 6px;
+    background: var(--tls-bg-deep);
+    font-size: 11px;
+    text-align: center;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  #sticky-tab-box .tab-buttons li:hover { background: var(--tls-hover); }
+  #sticky-tab-box .tab-buttons li.active {
+    background: var(--tls-bg);
+    box-shadow: inset 0 -2px 0 var(--tls-accent);
+  }
+  #sticky-tab-box .tab-content { padding: 15px; font-size: 13px; line-height: 1.5; }
+  #sticky-tab-box .material-icons { display: none; }
+  #sticky-tab-box a.mod-recent-title { font-size: 12px; }
+  #sticky-tab-box .mod-recent-info { display: flex; align-items: center; }
+  #sticky-tab-box span.mod-recent-author { font-size: 10px; }
+  #sticky-tab-box span.mod-recent-author:before { content: 'par '; margin-right: 3px; }
+  #sticky-tab-box .mod-recent-time span { margin-right: 3px; font-size: 10px; }
+}
+
+
+/* ---------- 9. Tablettes et petits écrans (version ordinateur) ---------- */
+
+@media only screen and (max-width: 1024px) {
+  body:not(#mpage-body-modern) #wrap { padding: 10px; }
+  #wrap .post-content { padding: 20px; }
+}
 
 @media only screen and (max-width: 768px) {
-    .forum-lastpost {
-        width: auto;
-    }
+  body:not(#mpage-body-modern) #wrap {
+    padding: 8px;
+    border-radius: 0 !important;
+    border-left: 0;
+    border-right: 0;
+  }
 
-    .forum.type-table-forum {
-        display: flex;
-        flex-direction: column;
-    }
+  /* Forum : la carte s'empile, l'image passe en bandeau */
+  #wrap .forum-wrapper {
+    display: block;
+    height: auto;
+  }
+  #wrap .forum-wrapper:hover { transform: none; }
+  #wrap .forum-icon { display: none; }
+  #wrap .forum-left-content {
+    display: block;
+    padding: 14px;
+  }
+  #wrap .forum-lastpost { width: auto; }
+  #wrap .forum-sous-cat { margin-top: 8px; }
 
+  /* Sujets : titre sur toute la largeur, dernier message dessous */
+  #wrap .posts-section {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 6px 10px;
+  }
+  #wrap .posts-description { grid-column: 2; }
+  #wrap .posts-lastpost {
+    grid-column: 2;
+    margin: 0;
+    padding: 4px 8px;
+  }
+
+  /* Message : auteur en bandeau au-dessus du texte */
+  #wrap .post { display: block; }
+  #wrap .post-aside {
+    float: none;
+    width: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--tls-line);
+  }
+  #wrap .post-body { width: auto; }
+  #wrap .post-author-avatar {
+    position: static;
+    float: none;
+    width: auto;
+    margin: 0;
+    padding: 12px;
+    text-align: center;
+  }
+  #wrap .post-author-avatar .avatar-big { display: inline-block; }
+  #wrap .post-author-avatar .avatar-big img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    object-position: 50% 0;
+  }
+  #wrap .post-profil-custom {
+    display: block;
+    padding: 12px 16px;
+    text-align: center;
+  }
+  #wrap .post-content {
+    padding: 18px 16px;
+    font-size: 15px;
+    text-align: left;
+  }
+
+  .container_officiel { padding: 24px 18px; }
+  .container_officiel h1,
+  #wrap .container_officiel h1.post-content { font-size: 24px; letter-spacing: .1em; }
 }
+
+
+/* ---------- 10. Téléphones (version web du forum) ---------- */
+
+@media only screen and (max-width: 600px) {
+  /* Switcheroo : la barre verticale (72px sur 375px d'écran !) devient
+     une barre horizontale en bas de l'écran */
+  body:not(#mpage-body-modern):has(#switcheroo[direction="vertical"]) {
+    padding-left: 0 !important;
+    padding-bottom: 64px !important;
+  }
+  .switcheroo[direction="vertical"][position="top"] {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    border-right: 0;
+    border-top: 1px solid var(--sw-line);
+    z-index: 150;
+  }
+  .switcheroo[direction="vertical"] .switcheroo__squircles {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 10px 12px;
+    gap: 12px;
+  }
+  .switcheroo__squircle { flex: 0 0 auto; }
+  .switcheroo__popper { display: none; }          /* pas de survol au doigt */
+  .switcheroo[direction="vertical"] .switcheroo__squircle.active:after {
+    left: 8px; right: 8px;
+    top: auto; bottom: -10px;
+    width: auto; height: 3px;
+    border-radius: 3px 3px 0 0;
+  }
+
+  /* Les boutons haut/bas recouvraient le texte */
+  .bouhautbas { display: none; }
+
+  /* Boutons partenaires : ils débordaient sur le côté */
+  .sw-footer { flex-wrap: wrap; gap: 6px; }
+  .sw-footer img { margin: 0; }
+  .sw-footer img:hover { transform: none; }
+
+  body:not(#mpage-body-modern) #wrap { padding: 6px; }
+  #wrap .page-header,
+  #wrap .topic-header { padding: 12px 14px; }
+  #wrap .page-header h1,
+  #wrap .topic-header h1 { font-size: 20px; }
+  #wrap .forum-header .category-title h2 { font-size: 20px; letter-spacing: .1em; }
+
+  /* Liste des sujets : dernier message compact */
+  #wrap .posts-section { padding: 10px; }
+  #wrap .posts-description h3 { font-size: 14px; }
+
+  /* Lecture */
+  #wrap .post-content { padding: 16px 14px; font-size: 15px; line-height: 1.7; }
+  #wrap .post-header .post-date { display: block; margin: 2px 0 0; }
+  #wrap .post-author-name { font-size: 19px; }
+
+  .container_officiel { padding: 20px 14px; }
+  .container_officiel:before,
+  .container_officiel:after { width: 14px; height: 14px; }
+}
+
+
+/* =====================================================================
+   PARTIE 2 — VERSION MOBILE DE FORUMACTIF
+   (téléphones : pages en body#mpage-body-modern)
+   ===================================================================== */
+
+/* Correctif : l'ancienne règle « .forum-content { display:none } »
+   (bloc max-width 768px) vidait les listes de sujets sur mobile. */
+#mpage-body-modern .forum-content { display: block !important; }
+
+#mpage-body-modern {
+  color: var(--tls-text);
+  font-weight: 400;
+}
+#mpage-body-modern a { font-weight: 400 !important; }
+
+/* Barre du haut et barre d'onglets du bas */
+#mpage-body-modern #header {
+  background: rgba(22, 24, 25, .96);
+  border-bottom: 1px solid var(--tls-line);
+  backdrop-filter: blur(6px);
+}
+#mpage-body-modern #tab-bar {
+  background: rgba(22, 24, 25, .97);
+  border-top: 1px solid var(--tls-line);
+}
+#mpage-body-modern #tab-bar a,
+#mpage-body-modern #tab-bar i { color: var(--tls-muted); }
+#mpage-body-modern #tab-bar a:hover,
+#mpage-body-modern #tab-bar a:hover i { color: var(--tls-accent); }
+
+/* Fil d'Ariane et description */
+#mpage-body-modern .mobi-breadcrumbs,
+#mpage-body-modern .mobi-breadcrumbs #tabs {
+  background: transparent;
+}
+#mpage-body-modern .mobi-breadcrumbs a { color: var(--tls-muted); }
+#mpage-body-modern #page-desc {
+  background: var(--tls-bg);
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r) !important;
+  color: var(--tls-text);
+  overflow: hidden;
+}
+
+/* Blocs de forums / sujets */
+#mpage-body-modern .forum {
+  margin: 0 8px 14px;
+  background: var(--tls-bg);
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r) !important;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .35);
+}
+#mpage-body-modern .forum > h2 {
+  background: var(--tls-bg-deep);
+  border-bottom: 1px solid var(--tls-line);
+  color: var(--tls-text-strong);
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+#mpage-body-modern .forum-section-wrap {
+  background: transparent;
+  border-bottom: 1px solid var(--tls-line);
+}
+#mpage-body-modern .forum-section-wrap:last-child { border-bottom: 0; }
+/* Colonne d'icône et séparateurs dessinés par Forumactif en clair */
+#mpage-body-modern .forum-section:before {
+  background: transparent;
+  border-right-color: var(--tls-line);
+}
+#mpage-body-modern .forum-section-wrap:after { background: var(--tls-line); }
+#mpage-body-modern .forum-lastpost {
+  background: var(--tls-surface-2);
+  border-radius: var(--tls-r-sm) !important;
+}
+#mpage-body-modern .forum-section {
+  background: transparent;
+  border: 0;
+  min-height: 0;
+}
+#mpage-body-modern .forum-icon {
+  background: transparent;
+  border: 0;
+}
+#mpage-body-modern .forum-icon i { color: var(--tls-muted); }
+#mpage-body-modern .forum_new .forum-icon i,
+#mpage-body-modern .post_new .forum-icon i { color: var(--tls-new); }
+#mpage-body-modern .forum-avatar img {
+  object-fit: cover;
+  object-position: 50% 0;
+  border-radius: var(--tls-r-sm) !important;
+}
+#mpage-body-modern .forum-content h3,
+#mpage-body-modern .forum-content h3 a,
+#mpage-body-modern .forum-content h3 b {
+  color: var(--tls-text-strong);
+  font-weight: 500 !important;
+}
+#mpage-body-modern .forum-content h3 strong {
+  color: var(--tls-accent);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+#mpage-body-modern .forum-description,
+#mpage-body-modern .forum-lastpost,
+#mpage-body-modern .forum-lastpost-time,
+#mpage-body-modern .forum-statistics {
+  color: var(--tls-muted);
+}
+#mpage-body-modern .forum-badge-icon { color: var(--tls-muted); }
+
+/* Messages */
+#mpage-body-modern .topic {
+  margin: 0 8px 14px;
+}
+#mpage-body-modern .post-section {
+  background: var(--tls-bg);
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r) !important;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .35);
+  color: var(--tls-text);
+}
+#mpage-body-modern .post-head {
+  background: linear-gradient(180deg, rgba(38, 50, 56, .5), rgba(38, 50, 56, 0));
+  border-bottom: 1px solid var(--tls-line);
+  padding: 12px 14px;
+}
+#mpage-body-modern .post-head .avatarContainer,
+#mpage-body-modern .post-head .avatarContainer img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  object-position: 50% 0;
+  border-radius: var(--tls-r-sm) !important;
+}
+#mpage-body-modern .post-info .h3 strong { font-weight: 600; }
+#mpage-body-modern .post-details { color: var(--tls-muted); font-size: 12px; }
+#mpage-body-modern .post-content {
+  padding: 16px;
+  font-size: 15px;
+  line-height: 1.7;
+  font-weight: 400;
+  text-align: left;   /* le justifié crée des trous sur petit écran */
+  color: var(--tls-text);
+}
+#mpage-body-modern .post-content a {
+  color: var(--tls-accent);
+  border-bottom: 1px solid var(--tls-accent-line);
+}
+#mpage-body-modern .post-content img { max-width: 100%; height: auto; }
+#mpage-body-modern .post-content blockquote,
+#mpage-body-modern .post-content .codebox {
+  background: var(--tls-surface-2);
+  border-left: 3px solid var(--tls-panel);
+  border-radius: var(--tls-r-sm) !important;
+  color: var(--tls-text);
+}
+
+/* Modules (sujets similaires…) et boutons */
+#mpage-body-modern .module {
+  background: var(--tls-bg);
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r) !important;
+  margin: 0 8px 14px;
+  color: var(--tls-text);
+}
+#mpage-body-modern .btn {
+  border-radius: var(--tls-r-sm) !important;
+}
+#mpage-body-modern .btn-rep-topic {
+  background: var(--tls-accent);
+  color: var(--tls-bg);
+}
+
+/* Les boutons haut/bas recouvraient le texte ; la version mobile
+   a déjà son propre bouton « retour en haut ». */
+#mpage-body-modern .bouhautbas { display: none; }
+
+/* Conteneur officiel sur mobile */
+#mpage-body-modern .container_officiel {
+  padding: 22px 16px;
+  margin: 0;
+}
+#mpage-body-modern .container_officiel h1,
+#mpage-body-modern .container_officiel h1.post-content { font-size: 22px; letter-spacing: .08em; }
+#mpage-body-modern .container_officiel h2,
+#mpage-body-modern .container_officiel h2.post-content { font-size: 17px; }
