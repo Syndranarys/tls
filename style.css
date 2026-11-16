@@ -678,6 +678,124 @@ body:not(#mpage-body-modern)::-webkit-scrollbar-thumb:hover { background-color: 
   border-radius: var(--tls-r) !important;
 }
 
+/* ---------- 8 bis. Bas de l'accueil : factions, qui est en ligne, stats ---------- */
+
+#wrap #block-online {
+  margin-top: 18px;
+  padding: 28px 24px 24px;
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r) !important;
+  background:
+    linear-gradient(180deg, rgba(22, 24, 25, .55) 0%, rgba(22, 24, 25, .92) 55%),
+    url(https://2img.net/i.imgur.com/Liu21pK.png) center top / cover no-repeat,
+    var(--tls-bg);
+  overflow: hidden;
+}
+
+/* Factions : 5 tuiles, icône au-dessus du nom */
+#wrap #block-online .group {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: stretch;           /* tuiles de même largeur */
+  gap: 12px;
+  margin: 0 0 24px;
+}
+#wrap #block-online .group .container {
+  display: block;
+  width: auto;
+}
+#wrap #block-online .centered-content {
+  display: flex;
+  flex-direction: column-reverse;   /* l'icône passe au-dessus du nom */
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 100%;
+  padding: 18px 10px 16px;
+  background: rgba(14, 16, 18, .55);
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r) !important;
+  backdrop-filter: blur(2px);
+  border-bottom: 0 !important;
+  transition: border-color .2s var(--tls-ease), background-color .2s var(--tls-ease), transform .2s var(--tls-ease);
+}
+#wrap #block-online .centered-content:hover {
+  background: rgba(14, 16, 18, .8);
+  border-color: var(--tls-line-strong);
+  transform: translateY(-3px);
+}
+#wrap #block-online .background-image {
+  width: 52px;
+  height: auto;
+  opacity: .55;
+  transition: opacity .2s var(--tls-ease), transform .2s var(--tls-ease);
+}
+#wrap #block-online .centered-content:hover .background-image {
+  opacity: 1;
+  transform: scale(1.06);
+}
+#wrap #block-online .overlay-text {
+  position: static;
+  transform: none;
+  width: auto;
+  font-size: 12px;
+  font-weight: 600 !important;
+  line-height: 1.3;
+  letter-spacing: .1em;
+  text-align: center;
+}
+
+/* Deux panneaux : en ligne / activité */
+#wrap #block-online .qeel-custom {
+  gap: 14px;
+}
+#wrap #block-online .block-online-now,
+#wrap #block-online .block-online-stat {
+  padding: 18px 20px;
+  background: rgba(14, 16, 18, .7);
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r) !important;
+  backdrop-filter: blur(3px);
+  line-height: 1.7;
+}
+#wrap #block-online .block-online-now:before,
+#wrap #block-online .block-online-stat:before {
+  display: block;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--tls-accent);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #fff;
+}
+#wrap #block-online .block-online-now:before { content: "Qui est en ligne ?"; }
+#wrap #block-online .block-online-stat:before { content: "Activité"; }
+#wrap #block-online .block-online-now p,
+#wrap #block-online .block-online-stat p { margin: 6px 0 0; }
+#wrap #block-online .block-online-stat strong { color: var(--tls-accent); }
+
+/* Trois compteurs */
+#wrap #block-online .footer-stats {
+  gap: 14px;
+  margin: 14px 0 0;
+}
+#wrap #block-online .footer-stats > div {
+  padding: 14px 18px;
+  background: rgba(14, 16, 18, .7);
+  border: 1px solid var(--tls-line);
+  border-left: 2px solid var(--tls-accent);
+  border-radius: var(--tls-r-sm) !important;
+  color: var(--tls-muted);
+}
+#wrap #block-online .footer-stats > div > strong {
+  font-size: 16px;
+  color: var(--tls-text-strong);
+}
+
+
 /* ---------- 9. Tablettes et petits écrans (version ordinateur) ---------- */
 
 @media only screen and (max-width: 1024px) {
@@ -819,6 +937,16 @@ body:not(#mpage-body-modern)::-webkit-scrollbar-thumb:hover { background-color: 
   #wrap .post-content { padding: 16px 14px; font-size: 15px; line-height: 1.7; }
   #wrap .post-header .post-date { display: block; margin: 2px 0 0; }
   #wrap .post-author-name { font-size: 19px; }
+
+  /* Bas de l'accueil */
+  #wrap #block-online { padding: 16px 12px; }
+  #wrap #block-online .group { grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 0 14px; }
+  #wrap #block-online .centered-content { padding: 12px 6px; }
+  #wrap #block-online .background-image { width: 38px; }
+  #wrap #block-online .overlay-text { font-size: 10px; letter-spacing: .05em; }
+  #wrap #block-online .qeel-custom,
+  #wrap #block-online .footer-stats { grid-template-columns: 1fr; margin: 0; }
+  #wrap #block-online .footer-stats { margin-top: 14px; }
 
   .container_officiel { padding: 20px 14px; }
   .container_officiel:before,
