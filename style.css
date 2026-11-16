@@ -957,12 +957,14 @@ body:not(#mpage-body-modern)::-webkit-scrollbar-thumb:hover { background-color: 
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   justify-items: stretch;           /* tuiles de même largeur */
+  align-items: stretch;             /* … et de même hauteur */
   gap: 12px;
   margin: 0 0 24px;
 }
 #wrap #block-online .group .container {
   display: block;
   width: auto;
+  height: 100%;
 }
 #wrap #block-online .centered-content {
   display: flex;
@@ -998,6 +1000,10 @@ body:not(#mpage-body-modern)::-webkit-scrollbar-thumb:hover { background-color: 
   position: static;
   transform: none;
   width: auto;
+  min-height: 2.6em;                /* place pour 2 lignes : logos alignés */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 12px;
   font-weight: 600 !important;
   line-height: 1.3;
