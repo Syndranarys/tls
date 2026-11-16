@@ -642,6 +642,266 @@ body:not(#mpage-body-modern) header .button:hover {
 .container_officiel i { color: var(--tls-muted); }
 
 
+/* ---------- 6 bis. Fiches : présentation, prédéfinis, espèces ----------
+   Structure commune : .fiche_wrapper > (bannière) + main > aside.left_content
+   + section.right_content, puis section.fiche_content.
+   Toutes les fiches déjà postées profitent du nouveau style. */
+
+.post-content .fiche_wrapper {
+  max-width: 980px;
+  margin: 10px auto;
+  background: var(--tls-bg-deep);
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r) !important;
+  overflow: hidden;
+  line-height: 1.7;
+  text-align: left;
+}
+/* Retours à la ligne ajoutés par Forumactif entre les blocs */
+.post-content .fiche_wrapper > br,
+.post-content .fiche_wrapper main > br,
+.post-content .fiche_wrapper .right_content > br,
+.post-content .fiche_wrapper .fiche_content > br { display: none; }
+
+/* Bannière (prédéfinis) */
+.post-content .fiche_wrapper > img,
+.post-content .fiche_wrapper > a > img {
+  display: block;
+  width: 100% !important;
+  max-height: 330px;
+  object-fit: cover;
+  object-position: 50% 25%;
+  border-bottom: 2px solid var(--tls-accent);
+}
+
+/* Colonnes */
+.post-content .fiche_wrapper main {
+  display: grid;
+  grid-template-columns: minmax(240px, 32%) 1fr;
+  gap: 0;
+  font-size: 0;            /* neutralise les espaces insécables entre les blocs */
+}
+.post-content .fiche_wrapper main > .left_content,
+.post-content .fiche_wrapper main > .right_content {
+  grid-row: 1;
+  font-size: var(--tls-read-size);
+}
+.post-content .fiche_wrapper main > .left_content { grid-column: 1; }
+.post-content .fiche_wrapper main > .right_content { grid-column: 2; }
+.post-content .fiche_wrapper .left_content {
+  width: auto;
+  margin: 0;
+  padding: 22px 22px 26px;
+  background: linear-gradient(180deg, rgba(38, 50, 56, .45), rgba(38, 50, 56, .15));
+  border-right: 1px solid var(--tls-line);
+}
+.post-content .fiche_wrapper .right_content {
+  width: auto;
+  padding: 22px 28px 26px;
+}
+.post-content .fiche_wrapper .fiche_content {
+  padding: 22px 28px 26px;
+  border-top: 1px solid var(--tls-line);
+}
+
+/* Titres de section */
+.post-content .fiche_wrapper h1,
+.post-content .fiche_wrapper h2 {
+  position: relative;
+  margin: 0 0 14px;
+  padding: 0 0 8px;
+  border-bottom: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--tls-text-strong);
+}
+.post-content .fiche_wrapper h2:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 36px;
+  height: 2px;
+  background: var(--tls-accent);
+}
+.post-content .fiche_wrapper article + br + h2,
+.post-content .fiche_wrapper article ~ h2 { margin-top: 26px; }
+
+/* Libellés de l'identification : discrets, la valeur ressort */
+.post-content .fiche_wrapper .left_content strong {
+  font-weight: 500;
+  color: var(--tls-muted);
+}
+
+/* Textes longs */
+.post-content .fiche_wrapper article {
+  max-height: 380px;
+  overflow: auto;
+  padding-right: 10px;
+  text-align: justify;
+}
+.post-content .fiche_wrapper article::-webkit-scrollbar { width: 6px; }
+.post-content .fiche_wrapper article::-webkit-scrollbar-thumb {
+  background: #3b4a50;
+  border-radius: 999px !important;
+}
+.post-content .fiche_wrapper img { max-width: 100%; height: auto; }
+
+/* Blocs dépliants (Force, cybernétique, capacités) */
+.post-content .fiche_wrapper details {
+  margin: 8px 0;
+  padding: 0 12px;
+  background: rgba(14, 16, 18, .55);
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r-sm) !important;
+}
+.post-content .fiche_wrapper details[open] { padding-bottom: 10px; }
+/* Lignes vides ajoutées par Forumactif autour des blocs dépliants */
+.post-content .fiche_wrapper details + br,
+.post-content .fiche_wrapper details + br + br,
+.post-content .fiche_wrapper details > br:first-of-type,
+.post-content .fiche_wrapper summary + br { display: none; }
+.post-content .fiche_wrapper summary {
+  position: relative;
+  margin: 0 -12px;
+  padding: 8px 34px 8px 12px;
+  list-style: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--tls-text-strong);
+}
+.post-content .fiche_wrapper summary::-webkit-details-marker { display: none; }
+.post-content .fiche_wrapper summary:after {
+  content: "+";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: var(--tls-accent);
+}
+.post-content .fiche_wrapper details[open] summary { margin-bottom: 6px; border-bottom: 1px solid var(--tls-line); }
+.post-content .fiche_wrapper details[open] summary:after { content: "–"; }
+.post-content .fiche_wrapper summary:hover { color: var(--tls-accent); }
+
+
+/* ---------- 6 ter. Fiche de planète (#elo_planet) ---------- */
+
+.post-content #elo_planet {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 0;
+  max-width: 980px;
+  margin: 10px auto;
+  padding: 0;
+  background: var(--tls-bg-deep);
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r) !important;
+  box-shadow: none;
+  overflow: hidden;
+  line-height: 1.7;
+}
+.post-content #elo_planet main { min-width: 0; }
+.post-content #elo_planet header img {
+  display: block;
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  border-bottom: 2px solid var(--tls-accent);
+}
+.post-content #elo_planet section { padding: 22px 28px 26px; }
+.post-content #elo_planet aside {
+  padding: 22px 22px 26px;
+  background: linear-gradient(180deg, rgba(38, 50, 56, .45), rgba(38, 50, 56, .15));
+  border-left: 1px solid var(--tls-line);
+}
+.post-content #elo_planet h1 {
+  margin: 0 0 16px;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--tls-text-strong);
+}
+.post-content #elo_planet h2 {
+  position: relative;
+  margin: 22px 0 10px;
+  padding: 0 0 8px;
+  border-bottom: 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--tls-text-strong);
+}
+.post-content #elo_planet aside h2:first-child,
+.post-content #elo_planet section h1 + h2 { margin-top: 0; }
+.post-content #elo_planet h2:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--tls-accent);
+}
+
+
+/* ---------- 6 quater. Recherche / proposition de lien (.tls-lien) ----------
+   Nouveau code proposé dans le sujet « Exemple de codage ». */
+
+.post-content .tls-lien {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  margin: 26px 0 14px;
+  padding: 28px 20px 18px;
+  background: var(--tls-bg-deep);
+  border: 1px solid var(--tls-line);
+  border-left: 3px solid var(--tls-accent);
+  border-radius: var(--tls-r) !important;
+  line-height: 1.7;
+  text-align: left;
+}
+.post-content .tls-lien > br { display: none; }
+.post-content .tls-lien-titre {
+  position: absolute;
+  top: -14px;
+  left: 16px;
+  margin: 0;
+  padding: 2px 12px;
+  background: var(--tls-accent);
+  color: var(--tls-bg);
+  border-radius: var(--tls-r-sm) !important;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.post-content .tls-lien-img {
+  flex: 0 0 150px;
+  width: 150px;
+  height: auto;
+  align-self: flex-start;
+  border: 1px solid var(--tls-line);
+  border-radius: var(--tls-r-sm) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .45);
+}
+.post-content .tls-lien-texte {
+  flex: 1;
+  min-width: 0;
+  max-height: 390px;
+  overflow: auto;
+  padding-right: 8px;
+}
+.post-content .tls-lien-texte strong { color: var(--tls-text-strong); font-weight: 600; }
+
+
 /* ---------- 7. Divers ---------- */
 
 /* Listes de RP (.elo_rp) */
@@ -872,6 +1132,25 @@ body:not(#mpage-body-modern)::-webkit-scrollbar-thumb:hover { background-color: 
     font-size: 15px;
     text-align: left;
   }
+
+  /* Fiches : une seule colonne */
+  .post-content .fiche_wrapper main,
+  .post-content #elo_planet { grid-template-columns: 1fr; }
+  .post-content .fiche_wrapper main > .left_content { grid-column: 1; grid-row: 1; }
+  .post-content .fiche_wrapper main > .right_content { grid-column: 1; grid-row: 2; }
+  .post-content .fiche_wrapper .left_content {
+    border-right: 0;
+    border-bottom: 1px solid var(--tls-line);
+  }
+  .post-content .fiche_wrapper .left_content,
+  .post-content .fiche_wrapper .right_content,
+  .post-content .fiche_wrapper .fiche_content,
+  .post-content #elo_planet section,
+  .post-content #elo_planet aside { padding: 18px 16px 20px; }
+  .post-content #elo_planet aside { border-left: 0; border-top: 1px solid var(--tls-line); }
+  .post-content .fiche_wrapper article { text-align: left; max-height: 320px; }
+  .post-content .tls-lien { flex-direction: column; gap: 14px; }
+  .post-content .tls-lien-img { width: 120px; flex-basis: auto; }
 
   .container_officiel { padding: 24px 18px; }
   .container_officiel h1,
