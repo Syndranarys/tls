@@ -1,5 +1,15 @@
 /* =====================================================================
-   MINI-PROFIL RP (bandeau du message, à droite du pseudo)
+   SWTLS — Ajouts 2026 (GitHub Pages : tls/ajouts.css)
+   Chargé après la feuille Forumactif par une ligne <link> dans le
+   template overall_header. Après chaque modification de ce fichier,
+   passer ?v=1 -> ?v=2 (puis 3, 4…) dans le template.
+
+   1. Mini-profil RP (avec le script « Mini-profil RP »)
+   ===================================================================== */
+
+
+/* =====================================================================
+   1. MINI-PROFIL RP (bandeau du message, à droite du pseudo)
    Script : swtls-mini-profil.js
    ===================================================================== */
 .post-profil-custom > .tls-miniprofil {
