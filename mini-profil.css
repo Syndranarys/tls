@@ -5,6 +5,7 @@
    passer ?v=1 -> ?v=2 (puis 3, 4…) dans le template.
 
    1. Mini-profil RP (avec le script « Mini-profil RP »)
+   2. Carte des mentions @pseudo (même script, pour la barre de rang)
    ===================================================================== */
 
 
@@ -135,3 +136,109 @@
 	.post-profil-custom > .tls-miniprofil { justify-content: center; margin-top: 10px; }
 	.tls-miniprofil-liens { justify-content: center; flex-wrap: wrap; }
 }
+
+/* =====================================================================
+   2. CARTE DES MENTIONS (@pseudo) : survol d'une mention dans un message
+   (couleur de faction, pastille et barre de rang : script « Mini-profil RP »)
+   ===================================================================== */
+/* La mention dans le texte : pastille turquoise */
+.post-content a.mentiontag {
+	padding: 1px 8px;
+	border: 1px solid var(--tls-accent-line);
+	border-radius: 999px;
+	background: var(--tls-accent-soft);
+	font-weight: 600;
+	color: var(--tls-accent);
+}
+.post-content a.mentiontag:hover { border-color: var(--tls-accent); }
+
+/* La carte : bloc sombre, filet et lueur à la couleur de la faction */
+.tooltipster-base.tooltipster-default {
+	--fac: var(--tls-accent);
+	overflow: hidden;
+	background:
+		radial-gradient(120% 90% at 0 0, color-mix(in srgb, var(--fac) 16%, transparent), transparent 60%),
+		var(--tls-bg-deep);
+	border: 1px solid color-mix(in srgb, var(--fac) 35%, transparent);
+	border-top: 2px solid var(--fac);
+	border-radius: var(--tls-r);
+	box-shadow: 0 14px 40px rgba(0, 0, 0, .6);
+	color: var(--tls-text);
+}
+.tooltipster-default .tooltipster-content { padding: 0; font-family: 'Exo 2', Arial, sans-serif; text-align: left; }
+.tooltipster-default .tooltipster-arrow { display: none; }
+
+/* Avatar à gauche ; pseudo, faction, rang à droite ; pied de carte en bas */
+.main-tooltip .tooltip-content {
+	display: grid;
+	grid-template-columns: 72px 1fr;
+	column-gap: 14px;
+	align-items: start;
+	padding: 16px 16px 0;
+}
+.main-tooltip .tooltip-content > * { grid-column: 2; text-align: left; }
+.main-tooltip .avatar-big { grid-column: 1; grid-row: 1 / span 4; margin: 0; }
+.main-tooltip .avatar-big img {
+	display: block;
+	width: 72px !important;
+	height: 108px !important;
+	max-width: none;
+	object-fit: cover;
+	object-position: 50% 0;
+	border: 1px solid color-mix(in srgb, var(--fac) 45%, transparent);
+	border-radius: var(--tls-r-sm);
+	box-shadow: 0 6px 16px rgba(0, 0, 0, .5);
+}
+.main-tooltip .tooltip-title { font-size: 17px; font-weight: 600; line-height: 1.2; }
+.main-tooltip .tls-miniprofil-faction { justify-self: start; height: 22px; margin-top: 6px; padding: 0 9px; font-size: 9.5px; gap: 6px; }
+.main-tooltip .tls-miniprofil-faction::before { width: 6px; height: 6px; }
+.main-tooltip .tooltip-subtitle {
+	margin-top: 8px;
+	font-size: 10px;
+	font-weight: 600;
+	line-height: 1.6;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	color: var(--tls-muted);
+}
+.main-tooltip .tooltip-subtitle i { font-style: normal; color: var(--tls-text); }
+.main-tooltip .tls-rang { --fac: inherit; margin-top: 8px; }   /* couleur de la carte (faction) */
+.main-tooltip .tls-rang span { min-width: 22px; padding: 1px 4px; font-size: 10px; }
+
+/* Pied : messages à gauche, boutons de contact à droite */
+.main-tooltip .post-author-details,
+.main-tooltip .post-author-contact-inline {
+	grid-row: 6;
+	align-self: center;
+	margin: 14px 0 0;
+	padding: 10px 0 12px;
+	border-top: 1px solid var(--tls-line);
+}
+.main-tooltip .post-author-details {
+	grid-column: 1 / -1;
+	font-size: 11px;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	color: var(--tls-muted);
+}
+.main-tooltip .post-author-details b { font-size: 15px; letter-spacing: 0; color: var(--tls-text-strong); }
+.main-tooltip .post-author-contact-inline {
+	grid-column: 2;
+	justify-self: end;
+	display: flex;
+	gap: 6px;
+	list-style: none;
+	border-top-color: transparent;
+}
+.main-tooltip .post-author-contact-inline a {
+	display: grid;
+	place-items: center;
+	width: 30px;
+	height: 30px;
+	border: 1px solid var(--tls-line-strong);
+	border-radius: var(--tls-r-sm);
+	background: rgba(255, 255, 255, .03);
+	transition: border-color .15s var(--tls-ease), background-color .15s var(--tls-ease);
+}
+.main-tooltip .post-author-contact-inline a:hover { border-color: var(--tls-accent); background: var(--tls-accent-soft); }
+.main-tooltip .post-author-contact-inline img { width: 18px; height: 18px; filter: invert(1); opacity: .75; }
