@@ -137,6 +137,18 @@
 	.tls-miniprofil-liens { justify-content: center; flex-wrap: wrap; }
 }
 
+/* Rang sur la page de profil (.mod-login-rank) : même style que sous les pseudos */
+.mod-login-rank.tls-rang-bloc {
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.7;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	color: var(--tls-muted);
+}
+.mod-login-rank.tls-rang-bloc i { font-style: normal; color: var(--tls-text); }
+.mod-login-rank .tls-rang { display: flex; justify-content: center; margin-top: 8px; }   /* sur sa propre ligne, centrée */
+
 /* =====================================================================
    2. CARTE DES MENTIONS (@pseudo) : survol d'une mention dans un message
    (couleur de faction, pastille et barre de rang : script « Mini-profil RP »)
