@@ -15,7 +15,7 @@
    9. Contour de focus au clavier
   10. Lecture des RP : texte plus grand, colonne un peu resserrée
   11. Accueil : mode Liste (bouton Cartes / Liste, script « Ergonomie »)
-  12. Messages : couleur de la faction de l'auteur
+  12. Messages : couleur de la faction de l'auteur, avatar qui suit
    ===================================================================== */
 
 
@@ -362,10 +362,14 @@ header a.button.tls-inscription:hover { background-color: var(--tls-accent-soft)
 
 /* =====================================================================
    8. ICÔNES HARMONISÉES
-   Le forum utilise Material Icons (pleines). Le menu latéral de
-   Forumactif utilise Material Symbols (contour) : on les passe en plein.
+   Le forum utilise Material Icons (pleines, 128 Ko). Forumactif utilise
+   aussi Material Symbols (menu, boutons citer/éditer/supprimer) : cette
+   police pèse 4 Mo et, tant qu'elle charge, le nom de l'icône s'affiche
+   en texte (« format_quote », « edit »…). Toutes ces icônes existent dans
+   Material Icons : on les y renvoie. Le navigateur ne télécharge plus
+   les 4 Mo, et tout le forum a le même style d'icônes.
    ===================================================================== */
-.material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.material-symbols-outlined { font-family: 'Material Icons' !important; font-variation-settings: normal; }
 /* Logo Discord vectoriel (script) : taille des autres icônes de la barre */
 #discord .tls-icone-discord { display: block; width: 22px; height: 22px; }
 
@@ -491,9 +495,28 @@ textarea:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
 	box-shadow: 0 0 12px color-mix(in srgb, var(--fac, transparent) 50%, transparent);
 	pointer-events: none;
 }
-.post:has(.post-author-name [style]) .post-aside {
-	background-image: linear-gradient(180deg, color-mix(in srgb, var(--fac, rgb(38, 50, 56)) 16%, transparent), transparent 340px);
+/* Teinte de faction : part du coin haut gauche, descend sur 340 px et
+   s'étend un peu vers la droite, derrière le nom et le mini-profil. */
+.post:has(.post-author-name [style]) .post-aside { background-image: none; }
+.post:has(.post-author-name [style])::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 0;
+	height: 340px;
+	background: linear-gradient(180deg, color-mix(in srgb, var(--fac, rgb(38, 50, 56)) 16%, transparent), transparent);
+	-webkit-mask-image: linear-gradient(90deg, #000 18%, transparent 60%);
+	mask-image: linear-gradient(90deg, #000 18%, transparent 60%);
+	pointer-events: none;
 }
+.post > .post-aside,
+.post > .post-body { position: relative; z-index: 1; }
+/* L'avatar suit la lecture (sticky dans la feuille) : le cadre du message
+   coupait l'effet avec overflow: hidden. « clip » garde les coins arrondis
+   sans bloquer le sticky. */
+#wrap .post-wrap { overflow: clip; }
 #wrap .post-author-avatar .avatar-big img {
 	box-shadow: 0 0 0 1px color-mix(in srgb, var(--fac, transparent) 55%, transparent), 0 6px 20px rgba(0, 0, 0, .5);
 }
