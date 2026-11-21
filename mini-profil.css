@@ -254,3 +254,341 @@
 }
 .main-tooltip .post-author-contact-inline a:hover { border-color: var(--tls-accent); background: var(--tls-accent-soft); }
 .main-tooltip .post-author-contact-inline img { width: 18px; height: 18px; filter: invert(1); opacity: .75; }
+
+/* =====================================================================
+   SWTLS — Ajouts 2026 (GitHub Pages : tls/ajouts.css)
+   Chargé après la feuille Forumactif par une ligne <link> dans le
+   template overall_header. Après chaque modification de ce fichier,
+   passer ?v=1 -> ?v=2 (puis 3, 4…) dans le template.
+
+   1. Mini-profil RP (avec le script « Mini-profil RP »)
+   2. Carte des mentions @pseudo (même script, pour la barre de rang)
+   3. Bannière réduite dans les sujets
+   4. Catégories repliables sur l'accueil (script « Ergonomie »)
+   5. Forum sans dernier message visible (Zone Secrète…)
+   6. Bouton « S'inscrire » dans l'en-tête (script « Ergonomie »)
+   ===================================================================== */
+
+
+/* =====================================================================
+   1. MINI-PROFIL RP (bandeau du message, à droite du pseudo)
+   Script : swtls-mini-profil.js
+   ===================================================================== */
+.post-profil-custom > .tls-miniprofil {
+	grid-column: 2;
+	grid-row: 1;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 8px;
+}
+/* Ligne 1 : faction + points ; ligne 2 : boutons */
+.tls-miniprofil-faction,
+.tls-miniprofil-points {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	height: 28px;
+	padding: 0 12px;
+	border-radius: 999px;
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+}
+.tls-miniprofil-faction {
+	border: 1px solid color-mix(in srgb, var(--fac) 45%, transparent);
+	background: color-mix(in srgb, var(--fac) 12%, transparent);
+	color: var(--fac);
+}
+.tls-miniprofil-faction::before {
+	content: "";
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: var(--fac);
+	box-shadow: 0 0 8px var(--fac);
+}
+.tls-miniprofil-points {
+	border: 1px solid var(--tls-line-strong);
+	background: rgba(14, 16, 18, .55);
+	color: var(--tls-muted);
+}
+.tls-miniprofil-points b { font-size: 14px; letter-spacing: 0; color: var(--tls-text-strong); }
+.tls-miniprofil-liens {
+	display: flex;
+	flex-basis: 100%;
+	justify-content: flex-end;
+	gap: 6px;
+}
+.tls-miniprofil-liens a {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	height: 30px;
+	padding: 0 12px 0 10px;
+	border: 1px solid var(--tls-line-strong);
+	border-radius: var(--tls-r-sm);
+	background: rgba(14, 16, 18, .55);
+	color: var(--tls-text);
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: .06em;
+	text-transform: uppercase;
+	text-decoration: none;
+	transition: color .15s var(--tls-ease), border-color .15s var(--tls-ease), background-color .15s var(--tls-ease);
+}
+.tls-miniprofil-liens a i { font-size: 16px; color: var(--tls-accent); }
+.tls-miniprofil-liens a:hover {
+	border-color: var(--tls-accent);
+	background: var(--tls-accent-soft);
+	color: var(--tls-text-strong);
+}
+/* Rang sous le pseudo : même typographie que les puces de droite */
+#wrap .post-profil-custom .post-author-title {
+	display: block;
+	margin-top: 6px;
+	font-size: 11px;
+	font-weight: 600;
+	font-style: normal;
+	line-height: 1.7;
+	letter-spacing: .12em;
+	text-transform: uppercase;
+	color: var(--tls-muted);
+}
+#wrap .post-profil-custom .post-author-title i { font-style: normal; color: var(--tls-text); }   /* 1re ligne (ex. Administratrice) */
+#wrap .post-profil-custom .post-author-title img { display: block; margin-top: 6px; }            /* barre de progression du rang */
+#wrap .post-profil-custom .post-author-title br:last-child { display: none; }
+
+/* Barre de rang (remplace l'image) : rangs acquis à la couleur de la faction */
+.tls-rang {
+	--fac: var(--tls-accent);
+	display: inline-flex;
+	gap: 3px;
+	margin-top: 8px;
+}
+.tls-rang span {
+	min-width: 26px;
+	padding: 2px 6px;
+	border: 1px solid var(--tls-line-strong);
+	border-radius: 3px;
+	font-family: Georgia, 'Times New Roman', serif;   /* chiffres romains */
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1.4;
+	text-align: center;
+	color: rgba(255, 255, 255, .22);
+}
+.tls-rang .acquis {
+	border-color: color-mix(in srgb, var(--fac) 45%, transparent);
+	background: color-mix(in srgb, var(--fac) 12%, transparent);
+	color: color-mix(in srgb, var(--fac) 75%, #fff);
+}
+.tls-rang .actuel {
+	border-color: var(--fac);
+	background: var(--fac);
+	color: var(--tls-bg);
+	box-shadow: 0 0 10px color-mix(in srgb, var(--fac) 55%, transparent);
+}
+
+/* Petits écrans : bandeau centré */
+@media only screen and (max-width: 768px) {
+	.post-profil-custom > .tls-miniprofil { justify-content: center; margin-top: 10px; }
+	.tls-miniprofil-liens { justify-content: center; flex-wrap: wrap; }
+}
+
+/* Rang sur la page de profil (.mod-login-rank) : même style que sous les pseudos */
+.mod-login-rank.tls-rang-bloc {
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.7;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	color: var(--tls-muted);
+}
+.mod-login-rank.tls-rang-bloc i { font-style: normal; color: var(--tls-text); }
+.mod-login-rank .tls-rang { display: flex; justify-content: center; margin-top: 8px; }   /* sur sa propre ligne, centrée */
+
+/* =====================================================================
+   2. CARTE DES MENTIONS (@pseudo) : survol d'une mention dans un message
+   (couleur de faction, pastille et barre de rang : script « Mini-profil RP »)
+   ===================================================================== */
+/* La mention dans le texte : pastille turquoise */
+.post-content a.mentiontag {
+	padding: 1px 8px;
+	border: 1px solid var(--tls-accent-line);
+	border-radius: 999px;
+	background: var(--tls-accent-soft);
+	font-weight: 600;
+	color: var(--tls-accent);
+}
+.post-content a.mentiontag:hover { border-color: var(--tls-accent); }
+
+/* La carte : bloc sombre, filet et lueur à la couleur de la faction */
+.tooltipster-base.tooltipster-default {
+	--fac: var(--tls-accent);
+	overflow: hidden;
+	background:
+		radial-gradient(120% 90% at 0 0, color-mix(in srgb, var(--fac) 16%, transparent), transparent 60%),
+		var(--tls-bg-deep);
+	border: 1px solid color-mix(in srgb, var(--fac) 35%, transparent);
+	border-top: 2px solid var(--fac);
+	border-radius: var(--tls-r);
+	box-shadow: 0 14px 40px rgba(0, 0, 0, .6);
+	color: var(--tls-text);
+}
+.tooltipster-default .tooltipster-content { padding: 0; font-family: 'Exo 2', Arial, sans-serif; text-align: left; }
+.tooltipster-default .tooltipster-arrow { display: none; }
+
+/* Avatar à gauche ; pseudo, faction, rang à droite ; pied de carte en bas */
+.main-tooltip .tooltip-content {
+	display: grid;
+	grid-template-columns: 72px 1fr;
+	column-gap: 14px;
+	align-items: start;
+	padding: 16px 16px 0;
+}
+.main-tooltip .tooltip-content > * { grid-column: 2; text-align: left; }
+.main-tooltip .avatar-big { grid-column: 1; grid-row: 1 / span 4; margin: 0; }
+.main-tooltip .avatar-big img {
+	display: block;
+	width: 72px !important;
+	height: 108px !important;
+	max-width: none;
+	object-fit: cover;
+	object-position: 50% 0;
+	border: 1px solid color-mix(in srgb, var(--fac) 45%, transparent);
+	border-radius: var(--tls-r-sm);
+	box-shadow: 0 6px 16px rgba(0, 0, 0, .5);
+}
+.main-tooltip .tooltip-title { font-size: 17px; font-weight: 600; line-height: 1.2; }
+.main-tooltip .tls-miniprofil-faction { justify-self: start; height: 22px; margin-top: 6px; padding: 0 9px; font-size: 9.5px; gap: 6px; }
+.main-tooltip .tls-miniprofil-faction::before { width: 6px; height: 6px; }
+.main-tooltip .tooltip-subtitle {
+	margin-top: 8px;
+	font-size: 10px;
+	font-weight: 600;
+	line-height: 1.6;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	color: var(--tls-muted);
+}
+.main-tooltip .tooltip-subtitle i { font-style: normal; color: var(--tls-text); }
+.main-tooltip .tls-rang { --fac: inherit; margin-top: 8px; }   /* couleur de la carte (faction) */
+.main-tooltip .tls-rang span { min-width: 22px; padding: 1px 4px; font-size: 10px; }
+
+/* Pied : messages à gauche, boutons de contact à droite */
+.main-tooltip .post-author-details,
+.main-tooltip .post-author-contact-inline {
+	grid-row: 6;
+	align-self: center;
+	margin: 14px 0 0;
+	padding: 10px 0 12px;
+	border-top: 1px solid var(--tls-line);
+}
+.main-tooltip .post-author-details {
+	grid-column: 1 / -1;
+	font-size: 11px;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	color: var(--tls-muted);
+}
+.main-tooltip .post-author-details b { font-size: 15px; letter-spacing: 0; color: var(--tls-text-strong); }
+.main-tooltip .post-author-contact-inline {
+	grid-column: 2;
+	justify-self: end;
+	display: flex;
+	gap: 6px;
+	list-style: none;
+	border-top-color: transparent;
+}
+.main-tooltip .post-author-contact-inline a {
+	display: grid;
+	place-items: center;
+	width: 30px;
+	height: 30px;
+	border: 1px solid var(--tls-line-strong);
+	border-radius: var(--tls-r-sm);
+	background: rgba(255, 255, 255, .03);
+	transition: border-color .15s var(--tls-ease), background-color .15s var(--tls-ease);
+}
+.main-tooltip .post-author-contact-inline a:hover { border-color: var(--tls-accent); background: var(--tls-accent-soft); }
+.main-tooltip .post-author-contact-inline img { width: 18px; height: 18px; filter: invert(1); opacity: .75; }
+
+
+/* =====================================================================
+   3. BANNIÈRE RÉDUITE DANS LES SUJETS
+   Sur l'accueil, la bannière garde toute sa hauteur (feuille, section 2).
+   Dans un sujet, on n'en laisse voir qu'une bande pour arriver plus vite
+   au premier message.
+   ===================================================================== */
+@media screen and (min-width: 768px) {
+	body:has(main#topic) #header-banner { height: 120px; }
+}
+
+
+/* =====================================================================
+   4. CATÉGORIES REPLIABLES SUR L'ACCUEIL
+   Script : swtls-ergonomie.js (ajoute le bouton et retient le choix)
+   ===================================================================== */
+#wrap .forum-header.tls-repliable { position: relative; cursor: pointer; }
+.tls-replier {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	display: grid;
+	place-items: center;
+	width: 34px;
+	height: 34px;
+	padding: 0;
+	transform: translateY(-50%);
+	border: 1px solid var(--tls-line-strong);
+	border-radius: var(--tls-r-sm);
+	background: rgba(14, 16, 18, .55);
+	color: var(--tls-muted);
+	cursor: pointer;
+	transition: color .15s var(--tls-ease), border-color .15s var(--tls-ease), background-color .15s var(--tls-ease);
+}
+.tls-replier:hover,
+.tls-replier:focus-visible { color: var(--tls-accent); border-color: var(--tls-accent); background: var(--tls-accent-soft); outline: none; }
+.tls-replier i { font-size: 22px; transition: transform .2s var(--tls-ease); }
+.forum-header.tls-replie .tls-replier i { transform: rotate(-90deg); }
+/* Catégorie repliée : on cache ses forums, le titre passe en retrait */
+.forum-header.tls-replie + .forum { display: none; }
+#wrap .forum-header.tls-replie .category-title h2 { opacity: .6; }
+#wrap .forum-header.tls-replie:hover .category-title h2 { opacity: 1; }
+
+
+/* =====================================================================
+   5. FORUM SANS DERNIER MESSAGE VISIBLE
+   Forum privé (Zone Secrète) ou encore vide : la case « dernier message »
+   n'affichait qu'une bulle grise. On y écrit un texte à la place.
+   ===================================================================== */
+.forum-lastpost:not(:has(a)) {
+	display: grid;
+	place-items: center;
+	min-height: 70px;
+}
+.forum-lastpost:not(:has(a)) > i { display: none; }
+.forum-lastpost:not(:has(a))::after {
+	content: "Accès réservé";
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: .12em;
+	text-transform: uppercase;
+	color: var(--tls-muted);
+}
+
+
+/* =====================================================================
+   6. BOUTON « S'INSCRIRE » DANS L'EN-TÊTE (visiteurs seulement)
+   Script : swtls-ergonomie.js (place le lien à gauche de « Connexion »)
+   ===================================================================== */
+header a.button.tls-inscription {
+	margin-right: 8px;
+	background-color: transparent;
+	border: 1px solid var(--tls-accent);
+	color: var(--tls-accent);
+}
+header a.button.tls-inscription:hover { background-color: var(--tls-accent-soft); color: var(--tls-accent); }
