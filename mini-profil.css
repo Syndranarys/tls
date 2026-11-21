@@ -16,6 +16,7 @@
   10. Lecture des RP : texte plus grand, colonne un peu resserrée
   11. Accueil : mode Liste (bouton Cartes / Liste, script « Ergonomie »)
   12. Messages : couleur de la faction de l'auteur, avatar qui suit
+  13. Discord : pastille « membres en ligne » (script « Ergonomie »)
    ===================================================================== */
 
 
@@ -572,4 +573,39 @@ textarea:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
 }
 #wrap .post-author-avatar .avatar-big img {
 	box-shadow: 0 0 0 1px color-mix(in srgb, var(--fac, transparent) 55%, transparent), 0 6px 20px rgba(0, 0, 0, .5);
+}
+
+
+/* =====================================================================
+  13. DISCORD : MEMBRES EN LIGNE
+   Pastille verte au coin de l'icône Discord de la barre du haut.
+   Le script « Ergonomie » y met le nombre de membres connectés.
+   ===================================================================== */
+#discord { position: relative; }
+#discord .tls-discord-enligne {
+	position: absolute;
+	top: 9px;
+	left: calc(50% + 6px);
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	height: 16px;
+	padding: 0 5px 0 4px;
+	border: 1px solid rgba(35, 165, 90, .55);
+	border-radius: 999px;
+	background: #16251c;
+	font-size: 10px;
+	font-weight: 700;
+	line-height: 1;
+	letter-spacing: 0;
+	color: #b9f3cf;
+	pointer-events: none;
+}
+#discord .tls-discord-enligne::before { /* point « en ligne » */
+	content: "";
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: #23a55a;
+	box-shadow: 0 0 6px #23a55a;
 }
