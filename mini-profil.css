@@ -17,6 +17,7 @@
   11. Accueil : mode Liste (bouton Cartes / Liste, script « Ergonomie »)
   12. Messages : couleur de la faction de l'auteur, avatar qui suit
   13. Discord : pastille « membres en ligne » (script « Ergonomie »)
+  14. Accueil, « Qui est en ligne » : survol d'une faction
    ===================================================================== */
 
 
@@ -608,4 +609,59 @@ textarea:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
 	border-radius: 50%;
 	background: #23a55a;
 	box-shadow: 0 0 6px #23a55a;
+}
+
+
+/* =====================================================================
+  14. ACCUEIL, « QUI EST EN LIGNE » : SURVOL D'UNE FACTION
+   Au survol d'une carte de faction, tout le bloc prend une légère
+   teinte de sa couleur (comme les messages), la carte s'éclaire, les
+   autres s'estompent, et dans « Qui est en ligne » seuls les membres de
+   cette faction ressortent. Sans script : on lit la couleur du nom de la
+   faction et celle des pseudos. Si une couleur change, la modifier ici.
+   ===================================================================== */
+#block-online:has(.container:hover [style*="9f6bff" i]) { --fac-survol: #9f6bff; }   /* Empire */
+#block-online:has(.container:hover [style*="5492f0" i]) { --fac-survol: #5492f0; }   /* République */
+#block-online:has(.container:hover [style*="ff0000" i]) { --fac-survol: #ff0000; }   /* Consortium */
+#block-online:has(.container:hover [style*="449e61" i]) { --fac-survol: #449e61; }   /* APEX */
+#block-online:has(.container:hover [style*="ff6f00" i]) { --fac-survol: #ff6f00; }   /* Mandaloriens */
+
+/* Teinte du bloc */
+#block-online { position: relative; }
+#block-online > * { position: relative; z-index: 1; }
+#block-online::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	background: linear-gradient(180deg, color-mix(in srgb, var(--fac-survol, transparent) 22%, transparent), transparent 75%);
+	opacity: 0;
+	transition: opacity .3s var(--tls-ease);
+	pointer-events: none;
+}
+#block-online:has(.container:hover)::after { opacity: 1; }
+
+/* Cartes : celle survolée s'éclaire, les autres s'estompent */
+#block-online .centered-content {
+	transition: border-color .2s var(--tls-ease), background-color .2s var(--tls-ease), transform .2s var(--tls-ease), opacity .2s var(--tls-ease), box-shadow .2s var(--tls-ease);
+}
+#block-online:has(.container:hover) .container:not(:hover) .centered-content { opacity: .5; }
+#block-online .container:hover .centered-content {
+	border-color: color-mix(in srgb, var(--fac-survol, #fff) 60%, transparent);
+	box-shadow: 0 0 18px color-mix(in srgb, var(--fac-survol, transparent) 30%, transparent);
+}
+
+/* Pseudos : ceux de la faction ressortent, les autres s'estompent */
+#block-online .block-online-now .usr_grp_clr { transition: opacity .2s var(--tls-ease), text-shadow .2s var(--tls-ease); }
+#block-online:has(.container:hover [style*="9f6bff" i]) .block-online-now .usr_grp_clr:not([style*="9f6bff" i]),
+#block-online:has(.container:hover [style*="5492f0" i]) .block-online-now .usr_grp_clr:not([style*="5492f0" i]),
+#block-online:has(.container:hover [style*="ff0000" i]) .block-online-now .usr_grp_clr:not([style*="ff0000" i]),
+#block-online:has(.container:hover [style*="449e61" i]) .block-online-now .usr_grp_clr:not([style*="449e61" i]),
+#block-online:has(.container:hover [style*="ff6f00" i]) .block-online-now .usr_grp_clr:not([style*="ff6f00" i]) { opacity: .25; }
+#block-online:has(.container:hover [style*="9f6bff" i]) .block-online-now .usr_grp_clr[style*="9f6bff" i],
+#block-online:has(.container:hover [style*="5492f0" i]) .block-online-now .usr_grp_clr[style*="5492f0" i],
+#block-online:has(.container:hover [style*="ff0000" i]) .block-online-now .usr_grp_clr[style*="ff0000" i],
+#block-online:has(.container:hover [style*="449e61" i]) .block-online-now .usr_grp_clr[style*="449e61" i],
+#block-online:has(.container:hover [style*="ff6f00" i]) .block-online-now .usr_grp_clr[style*="ff6f00" i] {
+	text-shadow: 0 0 10px color-mix(in srgb, var(--fac-survol) 60%, transparent);
 }
