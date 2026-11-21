@@ -472,8 +472,9 @@ textarea:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
   12. MESSAGES : COULEUR DE LA FACTION DE L'AUTEUR
    Sans script : on lit la couleur du pseudo (couleur du groupe).
    Liseré lumineux à gauche du message, teinte en haut de la colonne
-   avatar, contour fin de l'avatar. Les comptes hors faction (staff,
-   PNJ…) gardent un liseré gris neutre.
+   avatar, contour fin de l'avatar. Les PNJ (La Force, Occultus, Darth
+   Ânkh… : pseudo blanc) ont la même chose en argent. Les autres comptes
+   hors faction gardent un liseré gris neutre.
    Si une couleur de faction change, la modifier ici aussi.
    ===================================================================== */
 .post:has(.post-author-name [style*="9f6bff" i]) { --fac: #9f6bff; }   /* Empire Galactique */
@@ -481,6 +482,7 @@ textarea:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
 .post:has(.post-author-name [style*="5492f0" i]) { --fac: #5492f0; }   /* République Galactique */
 .post:has(.post-author-name [style*="ff6f00" i]) { --fac: #ff6f00; }   /* Protectorat Mandalorien */
 .post:has(.post-author-name [style*="449e61" i]) { --fac: #449e61; }   /* APEX */
+.post:has(.post-author-name [style*="ffffff" i]) { --fac: #cfdbe1; }   /* PNJ (pseudo blanc) : argent */
 
 .post { position: relative; }
 .post::before {
